@@ -1,0 +1,111 @@
+<div *ngIf="isEvaluating" class="loading-overlay">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div *ngIf="showSubjectSelector">  <!-- show list of past question papers -->
+    <p style="margin-top: 25px;margin-left: 25px"><b> Previous Years' questions papers  </b></p>
+    <div style="overflow-y: auto;">
+        <mat-list>
+            <mat-list-item *ngFor="let subject of subjects">
+                <button class="exam-button" mat-raised-button color="primary" (click)="getPastPapersForSubject(subject)">{{subject}}</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+
+<div *ngIf="showSubjectPaperSelector">  <!-- show list of past question papers -->
+    <p style="margin-top: 25px;margin-left: 25px"><b> Previous Years' questions papers {{selectedSubject}} </b></p>
+    <div style="overflow-y: auto;">
+        <mat-list>
+            <mat-list-item *ngFor="let paper of questionPapers" >
+                <button class="exam-button" mat-raised-button color="primary" (click)="getQuestionPaper(paper)">{{paper}}</button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+
+<div *ngIf="mockExamMode" style="display: flex; flex-direction: column; height: 93vh;">
+    <!-- Top Toolbar -->
+    <div style="display: flex;  flex-direction: row; height: 30px;  padding: 0 10px;">
+        <div style="width: 50%;text-align: center;font-weight: bold;font-size: 17px">Question paper</div>
+        <div style="width: 50%;text-align: center;font-weight: bold;font-size: 17px">Smart answer sheet</div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div style="flex: 1; display: flex; border: 1px solid green; overflow: hidden;">
+        <div style="display: flex; width: 100%; justify-content: center;">
+            <!-- PDF Viewer - Left Half -->
+            <div style="flex: 1; height: 100%; overflow-y: auto; display: flex; align-items: center; justify-content: center;">
+                <embed
+                    [src]="questionPaperUrl"
+                    type="application/pdf"
+                    width="100%"
+                    height="100%"
+                    page-fit="width"
+                />            
+            </div>
+
+            <!-- Notes Section - Right Half -->
+            <div style="flex: 1; height: 100%; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 20px; padding-left: 20px">
+                <!-- Buttons Row -->
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button *ngFor="let section of sections"
+                            (click)="sectionSelect(section)"
+                            mat-raised-button
+                            [color]="selectedSection?.label === section.label ? 'primary' : ''"
+                            style="border-radius: 30px; padding: 5px 15px; font-size: 16px;">
+                        {{ section.label }}
+                    </button>
+                </div>
+
+                <!-- This div will now be below the buttons -->
+                <div style="margin-top: 60px; padding: 10px; margin-bottom: 20px;">
+                    <div *ngFor="let _ of [].constructor(selectedSection.numberOfQuestions); let i = index;">
+                        <div class="text-field-container">
+                            <div class="number-box"> Question No. {{ selectedSection.startingQuestionIndex + (i+1) }}</div>
+                                <div style="position: relative; width: 100%;">
+                                    <textarea [(ngModel)]="answers[selectedSection.startingQuestionIndex + (i+1)]" 
+                                            class="custom-textarea" 
+                                            rows="5"  
+                                            (input)="adjustHeight($event)"
+                                            style="width: 100%; padding-right: 40px;">
+                                    </textarea>
+
+                                    <!-- Button in Bottom Right Corner -->
+                                    <button *ngIf="answersAvailable" mat-stroked-button 
+                                    (click)="explainAnswer(selectedSection.label, selectedSection.startingQuestionIndex + (i+1))"
+                                    style="position: absolute;bottom: 7px;right: -52px;z-index: 1;border: 1px solid grey">
+                                        <b>Ask doubts</b>
+                                    </button>
+                                </div>
+                            <div *ngIf="answersAvailable" [innerHTML]="getAnswerForQuestion(selectedSection.startingQuestionIndex + (i+1))" ></div>
+                            <div *ngIf="exlpainAnswer[selectedSection.startingQuestionIndex + (i+1)] == true">
+                                <app-exam-doubt 
+                                    [selectedSection]="selectedSection.label" 
+                                    [selectedQuestion]="selectedSection.startingQuestionIndex + (i+1)"
+                                    [currentPaperPath]="currentPaperPath">
+                                </app-exam-doubt>
+                            </div>
+                            <br>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Footer -->
+    <div style="
+        position: sticky;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+        width: 100%;">
+        <button mat-raised-button color="primary" style="width: 50%; margin-right: 5px;" (click)="closeExam()">Close</button>
+        <button mat-raised-button color="primary" style="width: 50%; margin-left: 5px;" (click)="evaluate()">Evaluate</button>
+    </div>
+</div>
+

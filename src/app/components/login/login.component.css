@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ✅ Base Layout */
+.figma-auth-wrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: #ffffff;
+  position: relative;
+  flex-direction: row;
+}
+
+.auth-logo {
+  position: fixed;
+  top: 75px;
+  left: 95px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.auth-logo img {
+  height: 30px;
+  width: 30px;
+  /* background-color: #918EFA; */
+  border-radius: 4px;
+}
+
+.auth-logo span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #918EFA;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.auth-left,
+.auth-right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.auth-illustration {
+  width: 85%;
+  max-width: 640px;
+  margin-top: -222px !important;
+}
+
+.auth-right {
+  flex-direction: column;
+}
+
+.no-account {
+  font-weight: 400;
+  line-height: 100%;
+  font-size: 12.8px;
+  letter-spacing: 0px;
+}
+
+.login-card {
+  max-width: 400px;
+  width: 100%;
+}
+
+.signup {
+  font-weight: 700;
+  line-height: 100%;
+  font-size: 12.8px;
+  letter-spacing: 0px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.login-link a {
+  margin-left: 5px;
+  color: #7d56f3;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link span {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+}
+
+.LWG {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  color: #616161;
+}
+
+.login-title {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-size: 31.25px;
+  font-weight: 700;
+  color: rgb(44, 44, 44);
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.login-title span {
+  color: rgb(44, 43, 43);
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-social {
+  width: 153px;
+  height: 56px;
+  border-radius: 56px;
+  flex: 1 1 45%;
+  background-color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+  color: #999;
+}
+
+.form-control {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.login-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.remember-section {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+  flex: 1;
+  margin-top: 10px;
+}
+
+.remember-section input[type="checkbox"] {
+  width: 21px;
+  height: 22px;
+  margin-right: 3px;
+  accent-color: #e1e1e4;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #918EFA;
+  width: 153px;
+  height: 56px;
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  font-size: 14px;
+  border-radius: 30px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(123, 97, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:disabled {
+  background-color: #918EFA;
+  box-shadow: none;
+  cursor: not-allowed;
+  width: 153px;
+  height: 56px;
+  border-radius: 56px;
+}
+
+.signup-link {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 20px;
+  color: #666;
+}
+
+.signup-link a {
+  color: #7B61FF;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.chat-widget-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 55px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  border: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.chat-widget-btn img,
+.chat-widget-btn i {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  color: #7B61FF;
+}
+
+.btn-social i {
+  font-size: 18px;
+  margin-right: 8px;
+  color: #333;
+}
+
+.login-form {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+
+/* ✅ Responsive Layout */
+@media (max-width: 991px) {
+  .figma-auth-wrapper {
+    flex-direction: column;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .auth-logo {
+    position: relative;
+    top: 20px;
+    left: 20px;
+  }
+
+  .social-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .login-action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .chat-widget-btn {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .auth-illustration {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-title {
+    font-size: 24px;
+  }
+
+  .auth-logo span {
+    font-size: 16px;
+  }
+
+  .btn-social {
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .btn-social i {
+    font-size: 16px;
+  }
+
+  .chat-widget-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chat-widget-btn img,
+  .chat-widget-btn i {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .social-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .btn-social {
+    flex: 1 1 45%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-social {
+    width: 100%;
+    max-width: 320px;
+  }
+}

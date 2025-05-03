@@ -1,0 +1,31 @@
+<!-- <h2 mat-dialog-title>Settings</h2> -->
+<mat-dialog-content class="wd-space">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let setting of settings" [expanded]="true" style="box-shadow: none;">
+      <!-- <mat-expansion-panel-header> -->
+      <mat-panel-title>
+        <!-- <strong>{{ setting.title }}</strong> -->
+        {{ setting.title }}
+      </mat-panel-title>
+      <!-- </mat-expansion-panel-header> -->
+
+      <div class="option-container">
+        <!-- <div *ngFor="let option of setting.options" class="option" (click)="selectOption(option)"> -->
+        <div *ngFor="let option of setting.options" class="option" [ngClass]="{ 'selected': isSelected(option) }"
+          (click)="selectOption(option)">
+          <img [src]="option.avatar" alt="{{ option.name }}" class="avatar">
+          <div class="option-content">
+            <h4 class="name">{{ option.name }}</h4>
+            <p class="description">{{ option.description }}</p>
+          </div>
+          <mat-icon *ngIf="isSelected(option)" class="checkmark-icon">check_circle</mat-icon>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button class="btn-primary" (click)="save()">Save</button>&nbsp;&nbsp;
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

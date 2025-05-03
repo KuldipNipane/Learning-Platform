@@ -1,0 +1,51 @@
+
+<div class="chat-container mat-elevation-z2">
+  <mat-toolbar *ngIf="selectedMaterial" color="primary" class="sub-toolbar sticky-toolbar">
+    <h2><mat-icon>psychology</mat-icon> Interactive Learning</h2>
+  </mat-toolbar>
+    <!-- Messages -->
+  <div class="chat-messages" #scrollContainer>
+    <div *ngFor="let message of messages" 
+        class="message" [ngClass]="{'sent': message.sent, 'received': !message.sent}">
+        <div style="display: flex; flex-direction: row;">
+          <img [src]="message.avatar" class="avatar" *ngIf="message.avatar">
+          <div [innerHTML]="message.text"></div>
+        </div>        
+      <div class="image-carousel" *ngIf="message.images && message.images.length > 0">
+        <p>Here are some visual representation</p>
+        <div class="carousel-container">
+          <img *ngFor="let url of message.images" [src]="url" alt="Related image"  (click)="showLargeImage(url)">
+        </div>
+      </div>            
+    </div>
+
+  </div>
+
+  <!-- Topic Buttons -->
+  <div class="topic-buttons">
+    <button mat-stroked-button 
+            *ngFor="let topic of suggestedTopics" 
+            (click)="selectTopic(topic)">
+      {{topic}}
+    </button>
+  </div>
+
+  <!-- Input Field -->  
+  <div class="chat-input">
+    <mat-form-field class="input-field" appearance="outline">
+      <mat-label>Enter a Topic/Concept that you want to learn</mat-label>
+      <input matInput #messageInput [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" autofocus>
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+<div *ngIf="largeImageUrl" class="large-image-modal">
+  <div class="modal-content">
+    <mat-icon class="close-icon" (click)="closeLargeImage()">close</mat-icon>
+    <img  class="img-height" [src]="largeImageUrl" alt="Large Image">
+  </div>
+</div>
+
+</div>

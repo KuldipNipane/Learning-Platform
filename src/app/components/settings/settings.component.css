@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+::ng-deep mat-panel-title {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  color: #000000;
+}
+
+.name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.5px;
+  color: #000000;
+  margin: 0px !important;
+}
+
+.description {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.option-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  padding: 10px;
+  align-items: center;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+  /* max-width: 400px; */
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0px 2px 0px !important;
+}
+
+.option.selected {
+  border-color: #918EFA;
+  box-shadow: 0 0 0 2px rgba(113, 88, 239, 0.1);
+}
+
+.option:hover {
+  background: #f0f0f0;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  background-color: #DAD0FB;
+}
+
+
+.option-content {
+  margin: 0px !important;
+}
+
+.checkmark-icon {
+  float: right;
+  font-size: 24px;
+  color: green;
+  margin-left: auto;
+}
+
+.option.selected .checkmark-icon {
+  display: block;
+}
+
+.btn-primary {
+  width: 153px;
+  height: 56px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  background-color: #7158ef;
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(113, 88, 239, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .cdk-overlay-backdrop {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(2px);
+}
+
+::ng-deep .mat-dialog-container {
+  border-radius: 20px;
+}

@@ -1,0 +1,144 @@
+<div class="signup-page">
+  <!-- Left Side (Image) -->
+  <div class="auth-logo">
+    <img src="assets/Group.png" alt="Logo Icon" />
+    <span>LearningCurve AI</span>
+  </div>
+
+  <div class="auth-left">
+    <img src="assets/signIn_Image.png" alt="Character" class="auth-illustration" />
+  </div>
+
+  <!-- Right Side (Form) -->
+  <div class="auth-right">
+    <div class="form-side">
+      <div class="signup-container">
+        <h2>
+          <span>
+            Welcome back to the <br />
+            LearningCurve AI Community
+          </span>
+        </h2>
+
+        <!-- <div class="social-buttons">
+          <button class="google-btn">
+            <i class="fa fa-google" aria-hidden="true"></i>
+            Log In with Google
+          </button>
+          <button class="guest-btn">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Log In as Guest
+          </button>
+        </div> -->
+        <form #signupForm="ngForm">
+          <div class="form-group">
+            <label class="name" for="name">Name</label>
+            <input type="text" id="name" class="user-name" name="name" [(ngModel)]="user.name" required />
+          </div>
+
+          <div class="form-group">
+            <label class="email" for="email">E-mail ID</label>
+            <div class="password-field">
+              <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control email-id"
+                required />
+              <!-- <span class="material-icons">visibility</span> -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" [(ngModel)]="user.dob" class="form-control" required />
+          </div>
+
+          <div class="form-group">
+            <label class="gender">Gender</label>
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="gender" value="male" [(ngModel)]="user.gender" />
+                Male
+              </label>
+              <label>
+                <input type="radio" id="female" name="gender" value="female" [(ngModel)]="user.gender" />
+                Female
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="academic">Academic</label>
+            <div class="radio-group">
+              <label><input type="radio" id="male" name="institute" value="school" [(ngModel)]="user.institute" />
+                School</label>
+              <label><input type="radio" id="female" name="institute" value="college" [(ngModel)]="user.institute" />
+                College</label>
+            </div>
+          </div>
+
+          <div style="display: flex">
+            <div class="form-group" *ngIf="user.institute === 'school'">
+              <label for="schoolClass">Class</label>
+              <select id="schoolClass" name="schoolClass" [(ngModel)]="user.schoolClass">
+                <option *ngFor="let class of [5, 6, 7, 8, 9, 10, 11, 12]" [value]="class">
+                  Class {{ class }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="user.institute === 'school'" style="margin-left: 20px">
+              <label for="schoolBoard">Board</label>
+              <select id="schoolBoard" name="schoolClass" [(ngModel)]="user.schoolBoard">
+                <option *ngFor="let board of ['CBSE', 'ICSE', 'State']" [value]="board">
+                  {{ board }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="user.institute === 'college'">
+            <label for="collegeCourse">Course</label>
+            <select id="collegeCourse" name="collegeCourse" [(ngModel)]="user.collegeCourse">
+              <option value="BE">BE</option>
+              <option value="MBBS">MBBS</option>
+              <option value="BCA">BCA</option>
+              <option value="MCA">MCA</option>
+            </select>
+          </div>
+
+          <div class="check-login">
+            <!-- <div class="remember-me">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember me</label>
+            </div> -->
+            <div *ngIf="otpSent" class="form-group">
+              <label for="otp">OTP</label>
+              <input type="text" id="otp" name="otp" [minlength]="6" [maxlength]="6" [(ngModel)]="otp"
+                (ngModelChange)="onOtpChange()" class="form-control" required />
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
+
+            <button type="button" class="btn btn-primary d-flex align-items-center login-btn" [ngClass]="{
+                'disabled-button': otpSent && otp.trim().length === 0
+              }" [disabled]="otpSent && otp.trim().length === 0"
+              (click)="!otpSent || otp.trim().length > 0 ? onSubmit() : null">
+              Submit
+              <mat-spinner *ngIf="isSignupLoading" class="btn-wait-spinner ms-2" diameter="20"></mat-spinner>
+            </button>
+          </div>
+        </form>
+
+        <div class="login-link">
+          <span class="no-account">Already have an account?</span>
+          <a routerLink="/login" class="signup">LOG IN</a>
+        </div>
+      </div>
+      <!-- <div class="chat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="36" width="36" viewBox="0 0 24 24" fill="#6f6dfa">
+          <path d="M4 4h16v10H5.17L4 15.17V4zm0-2a2 2 0 0 0-2 2v16l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4z" />
+        </svg>
+      </div> -->
+    </div>
+  </div>
+</div>

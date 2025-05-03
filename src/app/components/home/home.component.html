@@ -1,0 +1,272 @@
+<!-- Top Navbar -->
+<div class="top-navbar">
+  <div class="logo-section" (click)="goToHome()" style="cursor: pointer;">
+    <img src="assets/Group.png" alt="Logo" class="logo-img">
+    <span class="brand-name">LearningCurve AI</span>
+  </div>
+
+  <div class="profile-section">
+    <div class="user-profile">
+      <img [src]="user.avatarUrl || getAvatar(user.gender)" (click)="openUserDialog()" class="avatar-img"
+        alt="User Avatar" />
+      <span class="username">{{ user.name }}</span>
+      <img src="assets/IconChevron.png" alt="Chevron" class="bell-icon" />
+      <img src="assets/Icon-Notification.png" alt="Notification" class="bell-icon" />
+    </div>
+  </div>
+</div>
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <div class="sidebar-menu">
+      <div class="menu-section">
+        <!-- Sidebar Menu Items -->
+        <div class="menu-item h" [class.active]="selectedLearningType === 'summary'"
+          (click)="switchLearningType('summary')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>summarize</mat-icon>
+          <span>Class Notes</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'conceptMap'"
+          (click)="switchLearningType('conceptMap')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>account_tree</mat-icon>
+          <span>Mind Map</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'teachMe'"
+          (click)="switchLearningType('teachMe')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>school</mat-icon>
+          <span>iTutor</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'chat'" (click)="switchLearningType('chat')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>chat</mat-icon>
+          <span>Chat / Ask Doubts</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'vibeLearning'"
+          (click)="switchLearningType('vibeLearning')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>auto_awesome</mat-icon>
+          <span>Vibe Learning</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'realLifeExamples'"
+          (click)="switchLearningType('realLifeExamples')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>lightbulb</mat-icon>
+          <span>Use Cases</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'additionalLearning'"
+          (click)="switchLearningType('additionalLearning')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>add_circle</mat-icon>
+          <span>Additional Learning</span>
+        </div>
+
+        <div class="menu-item h" [class.active]="selectedLearningType === 'quiz'" (click)="switchLearningType('quiz')">
+          <!-- <img src="assets/Symbol.png" alt="Icon" class="bell-icon" /> -->
+          <mat-icon>quiz</mat-icon>
+          <span>Quiz Me</span>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer -->
+      <div class="menu-section general">
+        <label class="menu-section-label">GENERAL</label>
+        <div class="menu-item h" (click)="openUserDialog()">
+          <img src="assets/Setting-Symbol.png" alt="Settings" class="bell-icon" />
+          <span>Settings</span>
+        </div>
+        <div class="menu-item h">
+          <img src="assets/Symbol.png" alt="Help" class="bell-icon" />
+          <span>Help</span>
+        </div>
+        <div class="menu-item h" (click)="logout()">
+          <img src="assets/Exit-Symbol.png" alt="Logout" class="bell-icon" />
+          <span>Logout</span>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+
+    <!-- View 1: Subject Selection -->
+    <div class="main-content" *ngIf="viewStage === 'subjectSelection'">
+      <h1 class="welcome-title">Welcome Back, {{ user?.name || 'User' }} !</h1>
+      <div class="subtitle">Select Subject</div>
+
+      <div class="subject-grid-wrapper">
+        <div class="subject-grid">
+          <div *ngFor="let subject of subjects">
+            <a class="subject-tile" (click)="onSubjectSelect(subject)">
+              <img src="assets/subjects-icons/{{subject.toLowerCase()}}.svg" alt="{{subject}}" class="subject-icon">
+              <span>{{ subject | titlecase }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 2: Chapter List -->
+    <div class="content" *ngIf="viewStage === 'chapterList'">
+      <div class="selected-subject-grid sticky-breadcrumb">
+        <div class="selected-subject-breadcrumb active-breadcrumb" (click)="goToHome()">
+          <img class="breadcrumb-image" src="assets/selected-subject.png" alt="Subject">
+          {{ selectedSubject | titlecase }}
+        </div>
+      </div>
+
+      <div class="chapters">
+        <div class="subtitle">Select Topics</div>
+        <ul class="select-topics-ul">
+          <li class="select-topics" *ngFor="let chapter of chapters" (click)="onChapterSelect(chapter)">
+            {{ chapter | underscoreToSpace }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- View 3: Full Learning Interface -->
+    <div class="content" *ngIf="viewStage === 'fullLearning'">
+
+      <!-- BREADCRUMB -->
+      <div class="selected-subject-grid sticky-breadcrumb">
+        <div class="selected-subject-breadcrumb" (click)="onSubjectSelect(selectedSubject)">
+          <img class="breadcrumb-image" src="assets/selected-subject.png" alt="Subject">
+          {{ selectedSubject | titlecase }}
+        </div>
+
+        <div class="selected-subject-breadcrumb active-breadcrumb">
+          <img class="breadcrumb-image" src="assets/selected-topic.png" height="24" width="25"
+            style="background-color: #20BF6B; border-radius: 10px; padding: 5px;" alt="Topic">
+          {{ selectedChapter | underscoreToSpace }}
+        </div>
+      </div>
+
+      <!-- Toggle and Topics -->
+      <div class="show-original-container" *ngIf="selectedMaterial && (selectedLearningType == 'summary' ||
+        selectedLearningType == 'additionalLearning' ||
+        selectedLearningType == 'realLifeExamples' ||
+        selectedLearningType == 'websiteReferences')">
+
+        <div>
+          <div class="toggle-container">
+            <span class="toggle-label">Show original transcript</span>
+            <div class="toggle-switch" (click)="showOriginal = !showOriginal" [class.active]="showOriginal">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+
+          <div class="topics_div">
+            <h3>Topics covered:</h3>
+            <span style="margin-left: 55px;">{{ topics }}</span>
+          </div>
+        </div>
+
+        <hr class="border-bottom">
+
+        <div *ngFor="let insight of insightsArray" class="insight-container"
+          style="border-bottom: 1px solid; margin-bottom: 30px;">
+          <p *ngIf="showOriginal" class="original-text">{{ insight.text }}</p>
+
+          <div class="points-container">
+            <div *ngIf="selectedLearningType === 'summary'" class="points-width">
+              <ul class="bullet-ul">
+                <li *ngFor="let summary of insight.summary">
+                  <span class="big-dot">•</span> {{ summary }}
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="selectedLearningType === 'additionalLearning'">
+              <ul class="bullet-ul">
+                <li *ngFor="let additionalLearning of insight.additionalLearning">
+                  <span class="big-dot">•</span> {{ additionalLearning }}
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="selectedLearningType === 'realLifeExamples'">
+              <ul class="bullet-ul">
+                <li *ngFor="let realLifeExample of insight.realLifeExamples">
+                  <span class="big-dot">•</span> {{ realLifeExample }}
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="selectedLearningType === 'websiteReferences'">
+              <ul class="bullet-ul">
+                <li *ngFor="let url of (insight.websiteReferences?.split(',') || [])">
+                  <span class="big-dot">•</span>
+                  <a [href]="url.trim()" target="_blank">{{ url.trim() }}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mind Map -->
+      <div *ngIf="selectedLearningType === 'conceptMap'">
+        <app-concept-map [selectedMaterial]="selectedChapter" [selectedSubject]="selectedSubject"></app-concept-map>
+      </div>
+
+      <!-- iTutor -->
+      <div *ngIf="selectedLearningType === 'teachMe'" class="tutor-container">
+        <app-teach-me [selectedMaterial]="selectedChapter" [suggestedTopics]="topics"></app-teach-me>
+      </div>
+
+      <!-- Chat -->
+      <div *ngIf="selectedLearningType === 'chat'" class="chat-full-container">
+        <app-chat [selectedMaterial]="selectedChapter"></app-chat>
+      </div>
+
+      <!-- Vibe Learning -->
+      <div *ngIf="selectedLearningType === 'vibeLearning'" class="vibeLearning-container">
+        <app-vibe-learning [selectedMaterial]="selectedChapter" [selectedSubject]="selectedSubject"
+          [suggestedTopics]="topics"></app-vibe-learning>
+      </div>
+
+      <!-- Quiz -->
+      <div *ngIf="selectedLearningType === 'quiz'" class="quiz-container">
+        <div *ngIf="!quizLoaded">
+          <button mat-raised-button color="warn" (click)="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div *ngIf="quizLoaded">
+          <div *ngFor="let question of quizData; let i = index">
+            <div>{{ i + 1 }}. {{ question.question }}</div>
+            <div *ngFor="let option of question.options">
+              <mat-radio-group [(ngModel)]="tempSelectedAnswers[i]" (change)="saveAnswer(i)">
+                <mat-radio-button [value]="option">{{ option }}</mat-radio-button>
+                <span *ngIf="selectedAnswers[i] === option && selectedAnswers[i] === question.correct_answer"
+                  class="correct-icon">✅</span>
+                <span *ngIf="selectedAnswers[i] === option && selectedAnswers[i] !== question.correct_answer"
+                  class="wrong-icon">❌</span>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <button mat-raised-button color="accent" (click)="checkQuizAnswers()">Check Answers</button>
+        </div>
+      </div>
+
+      <!-- Exam Section -->
+      <div *ngIf="examCorner">
+        <app-exam [selectedMaterial]="selectedMaterial"></app-exam>
+      </div>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="circle-container" *ngIf="learningStarted">
+    <svg width="200" height="200" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        @keyframes ripple {
+          0% {
+            r: 0;
+            opacity: 1;
+          }
+          100% {
+            r: 80;
+            opacity: 0;
+          }
+        }
+        
+        .ripple {
+          fill: none;
+          stroke: black;
+          stroke-width: 4;
+          animation: ripple 1.5s infinite ease-out;
+        }
+      </style>
+
+      <circle cx="100" cy="100" r="80" stroke="black" stroke-width="10" fill="none"/>
+      
+      <!-- Ripple Effect Circles -->
+      <circle cx="100" cy="100" class="ripple" [ngStyle]="{ 'animation': isPlaying ? 'ripple 1.5s infinite ease-out' : 'none' }" />
+      <circle cx="100" cy="100" class="ripple" [ngStyle]="{ 'animation': isPlaying ? 'ripple 1.5s infinite ease-out 1s' : 'none' }" />
+      <circle cx="100" cy="100" class="ripple" [ngStyle]="{ 'animation': isPlaying ? 'ripple 1.5s infinite ease-out 1.5s' : 'none' }" />
+    </svg>
+  </div>
+
+  <div *ngIf="!learningStarted" class="center-content">
+    <mat-form-field appearance="outline" class="language-selector">
+      <mat-label>Language</mat-label>
+      <mat-select [(ngModel)]="selectedLanguage" name="language" (selectionChange)="onLanguageChange($event.value)">
+        <mat-option *ngFor="let lang of languages" [value]="lang.value">
+          {{ lang.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button mat-raised-button color="primary" mat-flat-button class="rounded-button start-button" (click)="startSession()">
+      <mat-icon>play_arrow</mat-icon>
+      Start
+    </button>
+  </div>
+
+  <div *ngIf="learningStarted" class="close-btn-container">
+    <button mat-button mat-raised-button color="warn" mat-flat-button class="rounded-button" (click)="stopSession()">
+      <mat-icon>close</mat-icon>    
+    </button>
+  </div>
+</div>

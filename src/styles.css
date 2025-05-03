@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Outer circle */
+.rounded-radio-custom .mat-radio-outer-circle {
+  border-color: white !important; /* Change the outer circle to white */
+}
+
+/* Inner circle (when selected) */
+.rounded-radio-custom.mat-radio-checked .mat-radio-inner-circle {
+  background-color: white !important; /* Change the selected circle to white */
+}
+
+

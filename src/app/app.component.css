@@ -1,0 +1,214 @@
+/* Base styles for sidenav and toolbar */
+.sidenav-container {
+  height: 100%;
+  top: 55px
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.content {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
+}
+
+.mat-sidenav {
+  width: 250px;
+}
+
+.toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 500;
+}
+
+.sub-toolbar{
+    margin-top: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 100;
+}
+.sticky-toolbar {
+  position: sticky;
+  top: 8;
+  z-index: 1000; /* Ensures it appears above other elements */
+  
+}
+
+.radio-group-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.rounded-radio-custom {
+  padding: 10px 10px;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  border-color: white  
+}
+
+.rounded-radio-custom.mat-radio-button-checked {
+  background-color: #ffffff; /* Highlighted background */
+  color: white;
+  border-color: #3f51b5; /* Match border with background */
+}
+
+.rounded-radio:hover {
+  border-color: #3f51b5;
+}
+
+.quiz-button-container {
+  text-align: center;         /* Center the content inside the container */
+}
+
+
+.topics_div{
+  font-weight: bold;
+  margin-bottom: 40px
+}
+
+.app-chat-container{
+  position: relative;
+  height: 800px;
+  margin-top: 40px;
+}
+
+.app-teachme-container{
+  position: relative;
+  height: 800px;  
+}
+
+
+.quiz-mat-spinner {
+  display: inline-block;
+  position: absolute;
+  left: 45%;
+  top: 45%;
+}
+
+.selected-class {
+  background-color: #d3d3d3; /* Light gray highlight */
+  font-weight: bold;
+  border-left: 4px solid #2196F3; /* Blue indicator */
+}
+
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  float: right;
+  
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #000000; /* Adjust color for better visibility on primary toolbar */
+}
+
+.toggle-switch {
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch.active {
+  background-color: #1976d2; /* No color change */
+}
+
+.toggle-knob {
+  width: 26px;
+  height: 26px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s ease;
+}
+
+.toggle-switch.active .toggle-knob {
+  left: 32px;
+}
+
+
+.mat-button-toggle-group {
+  border: none;
+}
+
+.mat-button-toggle {
+  background-color: transparent;
+  border: none;
+  position: relative;
+}
+
+.mat-button-toggle-checked {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mat-button-toggle-checked::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #007bff; /* Change this to your preferred color */
+}
+
+.mat-button-toggle-checked::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #ffffff;
+}
+
+.mat-button-toggle-button {
+  padding: 0 16px;
+}
+
+.mat-button-toggle-group {
+  color: white;
+}
+
+.mat-button-toggle {
+  color: white;
+}
+
+.mat-button-toggle .mat-icon {
+  color: white;
+}
+
+.mat-button-toggle-checked {
+  color: white;
+}
+

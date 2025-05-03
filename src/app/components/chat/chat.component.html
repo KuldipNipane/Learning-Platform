@@ -1,0 +1,21 @@
+<div class="chat-container mat-elevation-z2">
+    <!-- Messages -->
+  <div class="chat-messages" #scrollContainer>
+    <div *ngFor="let message of messages" 
+         class="message" 
+         [ngClass]="{'sent': message.sent, 'received': !message.sent}">
+      <p>{{ message.text }}</p>
+    </div>
+  </div>
+
+  <!-- Input Field -->
+  <div class="chat-input">
+    <mat-form-field class="input-field" appearance="outline">
+      <mat-label>Please enter your question</mat-label>
+      <input matInput [(ngModel)]="newMessage" (keydown.enter)="sendMessage()">
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="sendMessage()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>
