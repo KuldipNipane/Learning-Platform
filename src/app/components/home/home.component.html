@@ -10,11 +10,28 @@
       <img [src]="user.avatarUrl || getAvatar(user.gender)" (click)="openUserDialog()" class="avatar-img"
         alt="User Avatar" />
       <span class="username">{{ user.name }}</span>
-      <img src="assets/IconChevron.png" alt="Chevron" class="bell-icon" />
+      <!-- <img src="assets/IconChevron.png" alt="Chevron" class="bell-icon" />
+      <img src="assets/Icon-Notification.png" alt="Notification" class="bell-icon" /> -->
+
+      <!-- Chevron icon -->
+      <div class="dropdown-wrapper">
+        <img src="assets/IconChevron.png" alt="Chevron" class="chevron-icon" (click)="toggleLogoutDropdown()" />
+
+        <!-- Logout Dropdown -->
+        <div class="logout-dropdown" *ngIf="showLogoutDropdown">
+          <div class="menu-item" (click)="logout()">
+            <!-- <img src="assets/Exit-Symbol.png" alt="Logout" class="bell-icon" /> -->
+            <span>Logout</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification -->
       <img src="assets/Icon-Notification.png" alt="Notification" class="bell-icon" />
     </div>
   </div>
 </div>
+<!-- </div> -->
 
 <mat-sidenav-container class="sidenav-container">
   <!-- Sidebar -->
@@ -78,21 +95,48 @@
       </div>
 
       <!-- Sidebar Footer -->
-      <div class="menu-section general">
-        <label class="menu-section-label">GENERAL</label>
-        <div class="menu-item h" (click)="openUserDialog()">
+      <!-- <div class="menu-section general"> -->
+      <!-- <label class="menu-section-label">Exam Corner</label> -->
+      <!-- <div class="menu-item h" (click)="openUserDialog()">
           <img src="assets/Setting-Symbol.png" alt="Settings" class="bell-icon" />
           <span>Settings</span>
-        </div>
-        <div class="menu-item h">
+        </div> -->
+      <!-- <div class="menu-item h">
           <img src="assets/Symbol.png" alt="Help" class="bell-icon" />
           <span>Help</span>
-        </div>
-        <div class="menu-item h" (click)="logout()">
+        </div> -->
+      <!-- <div class="menu-item h" (click)="logout()">
           <img src="assets/Exit-Symbol.png" alt="Logout" class="bell-icon" />
           <span>Logout</span>
-        </div>
+        </div> -->
+      <!-- </div> -->
+
+      <div class="menu-section-label-wrapper" (click)="toggleExamCorner()">
+        <label class="menu-section-label">Exam Corner</label>
+        <mat-icon class="expansion-arrow" [ngClass]="{ 'rotate': showExamCorner }">
+          expand_more
+        </mat-icon>
       </div>
+      <div class="row Jce">
+        <div class="col-sm-3"></div>
+
+        <div *ngIf="showExamCorner" class="col-sm-6" style="width: 221.2px; height: 42px;">
+          <div class="menu-item h" [class.active]="examCorner" (click)="toggleExamMode()">
+            <span>Past Question Papers</span>
+          </div>
+        </div>
+        <div class="col-sm-3"></div>
+
+      </div>
+
+      <div class="menu-item h">
+        <span></span>
+      </div>
+
+      <div class="menu-item h">
+        <span></span>
+      </div>
+
     </div>
   </mat-sidenav>
 
@@ -139,13 +183,14 @@
     <div class="content" *ngIf="viewStage === 'fullLearning'">
 
       <!-- BREADCRUMB -->
-      <div class="selected-subject-grid sticky-breadcrumb">
-        <div class="selected-subject-breadcrumb" (click)="onSubjectSelect(selectedSubject)">
+      <div class="selected-subject-grid sticky-breadcrumb row" *ngIf="!examCorner">
+        <div class="selected-subject-breadcrumb col-sm-3" (click)="onSubjectSelect(selectedSubject)">
           <img class="breadcrumb-image" src="assets/selected-subject.png" alt="Subject">
           {{ selectedSubject | titlecase }}
         </div>
+        <div class="col-sm-1 res" style="display: flex;"></div>
 
-        <div class="selected-subject-breadcrumb active-breadcrumb">
+        <div class="selected-subject-breadcrumb active-breadcrumb col-sm-3">
           <img class="breadcrumb-image" src="assets/selected-topic.png" height="24" width="25"
             style="background-color: #20BF6B; border-radius: 10px; padding: 5px;" alt="Topic">
           {{ selectedChapter | underscoreToSpace }}

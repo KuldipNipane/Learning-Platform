@@ -265,7 +265,8 @@ mat-sidenav {
 }
 
 .selected-subject-grid {
-  display: grid;
+  /* display: grid; */
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 20px;
   max-width: 900px;
@@ -649,4 +650,79 @@ app-teach-me * {
   margin-right: 10px;
   color: #555;
   /* Dark grey */
+}
+
+::ng-deep .mat-drawer-inner-container {
+  overflow: visible !important;
+}
+
+@media (max-width:1487px) {
+  .selected-subject-grid{
+    display: grid;
+  }
+}
+
+
+
+
+
+.dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.chevron-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.logout-dropdown {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  z-index: 999;
+}
+
+.logout-dropdown .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+/* .logout-dropdown .menu-item:hover {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+  padding: 5px;
+} */
+
+.menu-section-label-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.expansion-arrow {
+  transition: transform 0.3s ease;
+}
+
+.expansion-arrow.rotate {
+  transform: rotate(180deg);
+}
+
+.Jce{
+  display: flex;
+  justify-content: space-between;
 }

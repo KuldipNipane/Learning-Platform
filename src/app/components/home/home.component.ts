@@ -47,7 +47,8 @@ export class HomeComponent {
   chapters: string[] = [];
   showChapters: boolean = false;
   viewStage: 'subjectSelection' | 'chapterList' | 'fullLearning' = 'subjectSelection';
-
+  showLogoutDropdown = false;
+  showExamCorner: boolean = false;
 
   constructor(private classService: ClassesService,
     private datePipe: DatePipe,
@@ -77,6 +78,14 @@ export class HomeComponent {
 
   getAvatar(gender: string): string {
     return gender === 'male' ? 'assets/avatar_male.png' : 'assets/avatar_female.png';
+  }
+
+  toggleLogoutDropdown() {
+    this.showLogoutDropdown = !this.showLogoutDropdown;
+  }
+
+  toggleExamCorner(): void {
+    this.showExamCorner = !this.showExamCorner;
   }
 
   fetchSubjects() {
@@ -229,6 +238,7 @@ export class HomeComponent {
   }
 
   switchLearningType(type: string) {
+    this.selectedMaterial = this.insightsArray.toString();
     this.selectedLearningType = type;
     this.examCorner = false;
   }
@@ -272,7 +282,7 @@ export class HomeComponent {
   openUserDialog() {
     const dialogRef = this.dialog.open(SettingsComponent, {
       disableClose: true,
-      width: '470px',
+      width: '550px',
 
       data: {
         type: 'setting'
@@ -286,10 +296,10 @@ export class HomeComponent {
 
   }
 
-  toggleExamMode() {
-    this.examCorner = true
-    this.selectedLearningType = '';
-    this.selectedMaterial = ""
+  toggleExamMode(){
+    this.examCorner = true;
+    this.selectedLearningType =  '';
+    this.selectedMaterial = "";
   }
 
   getChapterName(chapterName: string): string {
